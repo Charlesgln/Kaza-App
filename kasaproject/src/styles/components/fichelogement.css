@@ -6,22 +6,26 @@
 }
 
 .wrapper {
+  max-width: 1440px;
   width: 100%;
   padding: 40px 100px 0px 100px;
 }
 
+.logement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* ----------------SLIDER-LOGEMENT-------------- */
 
 .slider-logement {
   position: relative;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
 .slider-logement img {
   margin-top: 25px;
-  width: 1240px;
+  width: 100%;
   height: 415px;
   border-radius: 25px;
   object-fit: cover;
@@ -53,9 +57,223 @@
   position: absolute;
   transform: translate(-50%, -50%);
   top: 52%;
-  left: 98%;
+  right: 0;
   width: 47px;
   height: 77px;
   background-size: cover;
   background: url("../../assets/arrow_right.png");
+  background-size: cover;
+}
+
+/* -----------------HEADER-MENU--------------- */
+.header-logement {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+/* --------------------------RIGHT--------------------- */
+.host {
+  display: flex;
+  align-items: center;
+}
+
+.host img {
+  width: 64px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.host h4 {
+  width: 94px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 142.6%;
+  color: #ff6060;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.stars-rating {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 25px;
+  gap: 6px;
+}
+/* ----------------LEFT------------- */
+
+.left h2 {
+  color: #ff6060;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  margin-bottom: 5px;
+}
+
+.left h4 {
+  color: #ff6060;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.tags {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0px 24px 0px;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 25px;
+  background: #ff6060;
+  border-radius: 10px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  padding: 0px 50px 0px 50px;
+}
+/* ----------------COLLAPSE------------- */
+
+.collapses {
+  display: flex;
+  gap: 76px;
+}
+
+.collapse {
+  width: 100%;
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.content.show {
+  padding: 40px 12px 53px 12px;
+  height: auto;
+  max-height: 9999px;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 142.6%;
+  color: #ff6060;
+}
+
+.title {
+  padding: 0px 11px 0px 20px;
+  color: white;
+  height: 52px;
+  background: #ff6060;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.footer {
+  margin-top: 40px;
+}
+/* -----------MOBILE--------- */
+
+@media only screen and (max-width: 708px) {
+  .wrapper {
+    padding: 20px 20px 0px 20px;
+  }
+
+  .arrow-right {
+    width: 19px;
+    height: 31px;
+    right: 2%;
+  }
+
+  .arrow-left {
+    left: 5.4%;
+    width: 19px;
+    height: 31px;
+  }
+
+  .counter-pages {
+    display: none;
+  }
+
+  .header-logement {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  .slider-logement img {
+    height: 255px;
+  }
+
+  .left h2 {
+    font-size: 18px;
+  }
+
+  .left h4 {
+    font-size: 14px;
+  }
+
+  .tag {
+    font-size: 10px;
+    width: 84px;
+  }
+
+  .stars-rating {
+    order: 1;
+    font-size: 15px;
+    margin: 0;
+  }
+
+  .host {
+    order: 2;
+  }
+
+  .host h4 {
+    font-size: 12px;
+    width: 50px;
+  }
+  .host img {
+    width: 32px;
+  }
+
+  .right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16.5px;
+  }
+
+  .collapses {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .collapse {
+    width: 100%;
+  }
+  .content.show {
+    padding: 17px 11px 2px 11px;
+    font-size: 12px;
+  }
+  .title {
+    font-size: 13px;
+    height: 29px;
+  }
 }

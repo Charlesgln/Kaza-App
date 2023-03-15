@@ -18,7 +18,10 @@ const Home = () => {
     <section className="home">
       <div className="wrapper">
         <Header />
-        <LongImage />
+        <LongImage
+          className="long-image-1"
+          content="Chez vous, partout et ailleurs"
+        />
         <div className="cards">
           {logements.map((logement, index) => (
             <Card key={index} logement={logement} />

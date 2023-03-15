@@ -1,11 +1,11 @@
 import React from "react";
 
-const LongImage = () => {
+const LongImage = ({ className, content }) => {
   return (
     <div className="container">
       <div className="long-image"></div>
-      <div className="image"></div>
-      <h1>Chez vous, partout et ailleurs</h1>
+      <div className={className}></div>
+      <h1>{content}</h1>
     </div>
   );
 };
