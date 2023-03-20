@@ -4,54 +4,57 @@ import Collapse from "../components/Collapse";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ImageSlider from "../components/ImageSlider";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useNavigate } from "react-router-dom";
+
 import Rating from "../components/Rating";
 
-const FicheLogement = ({ key }) => {
-  console.log(key);
-  const [logements, setLogements] = useState([]);
+const FicheLogement = () => {
+  let navigate = useNavigate();
+  let { id } = useParams();
+
+  const [logement, setLogement] = useState([]);
   const [tags, setTags] = useState([]);
   const [equipments, setEquipments] = useState([]);
 
+  useEffect(() => {
+    const getLogement = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3004/logements/${id}`, {
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:3004",
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        });
+        setLogement(res.data);
+        setTags(res.data.tags);
+        setEquipments(res.data.equipments);
+      } catch (error) {
+        navigate("/404");
+      }
+    };
+    getLogement();
+  }, [id]);
+
   const slides = [
     {
-      url: logements.length > 0 ? logements[0].pictures[0] : "",
-      title: logements.length > 0 ? logements[0].title[0] : "",
+      url: logement && logement.pictures ? logement.pictures[0] : "",
+      title: logement ? logement.title : "",
     },
     {
-      url: logements.length > 0 ? logements[0].pictures[1] : "",
-      title: logements.length > 0 ? logements[0].title[1] : "",
+      url: logement && logement.pictures ? logement.pictures[1] : "",
+      title: logement ? logement.title : "",
     },
     {
-      url: logements.length > 0 ? logements[0].pictures[2] : "",
-      title: logements.length > 0 ? logements[0].title[2] : "",
+      url: logement && logement.pictures ? logement.pictures[2] : "",
+      title: logement ? logement.title : "",
     },
     {
-      url: logements.length > 0 ? logements[0].pictures[3] : "",
-      title: logements.length > 0 ? logements[0].title[3] : "",
+      url: logement && logement.pictures ? logement.pictures[3] : "",
+      title: logement ? logement.title : "",
     },
   ];
 
-  const getData = async () => {
-    try {
-      const res = await axios.get("http://localhost:3004/logements");
-      setLogements(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  useEffect(() => {
-    if (logements.length > 0) {
-      setTags(logements[0].tags);
-      setEquipments(logements[0].equipments);
-    }
-  }, [logements]);
   return (
     <section className="logement">
       <div className="wrapper">
@@ -61,8 +64,8 @@ const FicheLogement = ({ key }) => {
 
         <div className="header-logement">
           <div className="left">
-            <h2>{logements.length > 0 ? logements[0].title : ""}</h2>
-            <h4>{logements.length > 0 ? logements[0].location : ""}</h4>
+            <h2>{logement ? logement.title : ""}</h2>
+            <h4>{logement ? logement.location : ""}</h4>
             <div className="tags">
               {tags.map((tag, index) => {
                 return (
@@ -76,24 +79,19 @@ const FicheLogement = ({ key }) => {
 
           <div className="right">
             <div className="host">
-              <h4>{logements.length > 0 ? logements[0].host.name : ""}</h4>
+              <h4>{logement.host ? logement.host.name : ""}</h4>
               <img
-                src={logements.length > 0 ? logements[0].host.picture : ""}
+                src={logement.host ? logement.host.picture : ""}
                 alt={
-                  logements.length > 0
-                    ? "Photo de " + logements[0].host.name
-                    : ""
+                  "Photo de " + logement.length > 0 ? logement.host.name : ""
                 }
               />
             </div>
-            <Rating rating={logements.length > 0 ? logements[0].rating : ""} />
+            <Rating rating={logement.rating} />
           </div>
         </div>
         <div className="collapses">
-          <Collapse
-            content={logements.length > 0 ? logements[0].description : ""}
-            title="Description"
-          />
+          <Collapse content={logement.description} title="Description" />
           <Collapse
             content={equipments.map((equipment, index) => {
               return (

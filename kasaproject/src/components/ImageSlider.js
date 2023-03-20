@@ -16,7 +16,6 @@ const ImageSlider = ({ slides }) => {
       setActualPage(3);
     }
   };
-
   return (
     <div className="slider-logement">
       <div className="arrow-left" onClick={previousSlide}></div>
