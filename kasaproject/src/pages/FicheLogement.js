@@ -1,9 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Collapse from "../components/Collapse";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ImageSlider from "../components/ImageSlider";
+import logementsData from "../assets/db.json";
+
 import { useParams, useNavigate } from "react-router-dom";
 
 import Rating from "../components/Rating";
@@ -12,28 +13,23 @@ const FicheLogement = () => {
   let navigate = useNavigate();
   let { id } = useParams();
 
-  const [logement, setLogement] = useState([]);
+  const [logement, setLogement] = useState({});
   const [tags, setTags] = useState([]);
   const [equipments, setEquipments] = useState([]);
+  const [hostName, setHostName] = useState("");
+  const [hostPicture, setHostPicture] = useState("");
 
   useEffect(() => {
-    const getLogement = async () => {
-      try {
-        const res = await axios.get(`http://localhost:3004/logements/${id}`, {
-          headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3004",
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        });
-        setLogement(res.data);
-        setTags(res.data.tags);
-        setEquipments(res.data.equipments);
-      } catch (error) {
-        navigate("/404");
-      }
-    };
-    getLogement();
+    const logement = logementsData.find((item) => item.id === id);
+    if (logement) {
+      setLogement(logement);
+      setTags(logement.tags);
+      setEquipments(logement.equipments);
+      setHostName(logement.host.name);
+      setHostPicture(logement.host.picture);
+    } else {
+      navigate("/404");
+    }
   }, [id]);
 
   const slides = [
@@ -79,13 +75,8 @@ const FicheLogement = () => {
 
           <div className="right">
             <div className="host">
-              <h4>{logement.host ? logement.host.name : ""}</h4>
-              <img
-                src={logement.host ? logement.host.picture : ""}
-                alt={
-                  "Photo de " + logement.length > 0 ? logement.host.name : ""
-                }
-              />
+              <h4>{hostName}</h4>
+              <img src={hostPicture} alt={"Photo de " + hostName} />
             </div>
             <Rating rating={logement.rating} />
           </div>

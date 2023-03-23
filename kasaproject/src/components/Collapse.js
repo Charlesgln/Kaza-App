@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { ReactComponent as ChevronDown } from "../assets/chevron_down.svg";
+import { ReactComponent as ChevronUp } from "../assets/chevron_up.svg";
 
 const Collapse = ({ title, content }) => {
-  const [isSelected, setIsSelected] = useState(true);
+  const [isSelected, setIsSelected] = useState(false);
 
   const toggleSelection = () => {
     setIsSelected(!isSelected);
@@ -13,7 +13,7 @@ const Collapse = ({ title, content }) => {
     <div className="collapse">
       <div className="title" onClick={toggleSelection}>
         <h4>{title}</h4>
-        <FontAwesomeIcon icon={isSelected ? faChevronUp : faChevronDown} />
+        {isSelected ? <ChevronDown fill="white" /> : <ChevronUp fill="white" />}
       </div>
       <div className={isSelected ? "content show" : "content"}>{content}</div>
     </div>

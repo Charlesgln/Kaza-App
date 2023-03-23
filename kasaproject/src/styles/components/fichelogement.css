@@ -101,8 +101,9 @@
   margin-top: 24px;
   display: flex;
   justify-content: flex-end;
-  font-size: 25px;
-  gap: 6px;
+  width: 200px;
+  gap: 0px;
+  margin-bottom: 24px;
 }
 /* ----------------LEFT------------- */
 
@@ -234,12 +235,12 @@
 
   .tag {
     font-size: 10px;
-    width: 84px;
+    width: 30px;
   }
 
   .stars-rating {
     order: 1;
-    font-size: 15px;
+    width: 150px;
     margin: 0;
   }
 

@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LongImage from "../components/LongImage";
-import axios from "axios";
+import logementsData from "../assets/db.json";
 import Card from "../components/Card";
 
 const Home = () => {
   const [logements, setLogements] = useState([]);
-  const getData = () => {
-    axios
-      .get("http://localhost:3004/logements")
-      .then((res) => setLogements(res.data));
-  };
+  console.log(logements);
 
-  useEffect(() => getData(), []);
+  useEffect(() => {
+    setLogements(logementsData);
+  }, []);
+
   return (
     <section className="home">
       <div className="wrapper">
